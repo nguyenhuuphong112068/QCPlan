@@ -5,41 +5,74 @@ namespace App\Http\Controllers\Pages\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
          public function index(){
 
+                $groups = DB::table('groups')->where('active', true)->get();
                 $deparments = DB::table('deparments')->where('active', true)->get();
                 $userGroups = DB::table('usergroup')->where('active', true)->get();
-
                 $datas = DB::table('user_management')->where ('isActive',1)->orderBy('created_at','desc')->get();
                 
                 session()->put(['title'=> 'Danh Sách Người Dùng']);
            
-                return view('pages.User.list',['datas' => $datas, 'deparments' => $deparments, 'userGroups' => $userGroups]);
+                return view('pages.User.list',['datas' => $datas, 'deparments' => $deparments, 'userGroups' => $userGroups, 'groups' => $groups]);
         }
     
 
         public function store (Request $request) {
-                $request->validate([
-                        'name' => 'required|string|max:255|unique:user_management,name',
-                        'shortName' => 'required|string|max:255|unique:user_management,shortName',
-                    
-                ],[
-                        'name.required' => 'Vui lòng nhập tên chỉ tiêu kiểm',
-                        'shortName.required' => 'Vui lòng nhập tên viết tắt.',
-                        'name.unique' => 'Chỉ tiêu kiểm đã tồn tại trong hệ thống.',
-                        'shortName.unique' => 'Tên viết tắt đã tồn tại trong hệ thống.',
+                $validator = Validator::make($request->all(), [
+                'userName' => 'required|string|max:10|min:5|unique:user_management,userName',
+                'passWord' => [
+                        'required','string','min:6','max:255',
+                        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
+                'fullName' => 'required|string|max:255|min:5',
+                'userGroup' => 'required',
+                'deparment' => 'required',
+                'mail' => 'required',
+                'groupName' => 'required',
+
+                ], [
+                'userName.required' => 'Vui lòng nhập tên đăng nhập.',
+                'userName.unique' => 'Tên đăng nhập đã tồn tại.',
+                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
+                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+
+                'passWord.required' => 'Vui lòng nhập mật khẩu.',
+                'passWord.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
+                'passWord.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.',
+                
+                'fullName.required' => 'Vui lòng nhập tên đăng nhập.',
+                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
+                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+                
+                'userGroup.required' => 'Vui lòng chọn phân quyền',
+
+                'deparment.required' => 'Vui chọn Phòng Ban',
+
+                'mail.required' => 'Nếu Không Có Mail Vui Lòng Nhập NA',
+
+                'groupName.required' => 'Vui lòng chọn tổ',
+
                 ]);
+               
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'createErrors')->withInput();
+                }
+
                 DB::table('user_management')->insert([
                         'userName' => $request->userName,
-                        'userGroup' => $request->userGroup,
-                        'passWord' => $request->passWord,
+                        'passWord' => Hash::make($request->passWord),
                         'fullName' => $request->fullName,
-                        'deparment' => $request->fullName,
+                        'userGroup' => $request->userGroup,
+                        'deparment' => $request->deparment,
                         'groupName' => $request->groupName,
                         'mail' => $request->mail,
-                        'changePWdate' => today() + 90,
+                        'changePWdate' => today()->addDays(90),
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'created_at' => now(),
                 ]);
@@ -48,29 +81,64 @@ class UserController extends Controller
 
         public function update(Request $request){
                
-                $request->validate([
-                        'name' => 'required|string|max:255',
-                        'shortName' => 'required|string|max:255',
-                ],[
-                        'name.required' => 'Vui lòng nhập tên chỉ tiêu kiểm',
-                        'shortName.required' => 'Vui lòng nhập tên viết tắt.',
-                ]);
+                $validator = Validator::make($request->all(), [
+                'userName' => 'required|string|max:10|min:5|unique:user_management,userName',
+                'passWord' => [
+                        'required','string','min:6','max:255',
+                        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
+                'fullName' => 'required|string|max:255|min:5',
+                'userGroup' => 'required',
+                'deparment' => 'required',
+                'mail' => 'required',
+                'groupName' => 'required',
 
-               DB::table('user_management')->where('id', $request->id)->update([
-                        'name' => $request->name,
-                        'shortName' => $request->shortName,
-                        'isActive' => true,
-                        'prepareBy' => session('user')['fullName'],
-                        'updated_at' => now(), 
+                ], [
+                'userName.required' => 'Vui lòng nhập tên đăng nhập.',
+                'userName.unique' => 'Tên đăng nhập đã tồn tại.',
+                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
+                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+
+                'passWord.required' => 'Vui lòng nhập mật khẩu.',
+                'passWord.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
+                'passWord.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.',
+                
+                'fullName.required' => 'Vui lòng nhập tên đăng nhập.',
+                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
+                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+                
+                'userGroup.required' => 'Vui lòng chọn phân quyền',
+
+                'deparment.required' => 'Vui chọn Phòng Ban',
+
+                'mail.required' => 'Nếu Không Có Mail Vui Lòng Nhập NA',
+
+                'groupName.required' => 'Vui lòng chọn tổ',
+
                 ]);
-                return redirect()->back()->with('success', 'Cập nhật thành công!');
+                
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
+                } 
+
+                DB::table('user_management')->insert([
+                        'userName' => $request->userName,
+                        'passWord' => Hash::make($request->passWord),
+                        'fullName' => $request->fullName,
+                        'userGroup' => $request->userGroup,
+                        'deparment' => $request->deparment,
+                        'groupName' => $request->groupName,
+                        'mail' => $request->mail,
+                        'changePWdate' => today()->addDays(90),
+                        'prepareBy' => session('user')['fullName'] ?? 'Admin',
+                        'created_at' => now(),
+                ]);
+                return redirect()->back()->with('success', 'Đã thêm thành công!');   
         }
 
         public function deActive(string|int $id){
-          
-
+                
                DB::table('user_management')->where('id', $id)->update([
-                        'isActive' => false,
+                        'isActive' => 0,
                         'prepareBy' => session('user')['fullName'],
                         'updated_at' => now(), 
                 ]);

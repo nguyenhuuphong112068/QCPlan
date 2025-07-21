@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages\MaterData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductNameController extends Controller
 {
@@ -17,21 +18,25 @@ class ProductNameController extends Controller
         }
 
 
-        public function store (Request $request) {
-                $request->validate([
+        public function store(Request $request){
+                $validator = Validator::make($request->all(), [
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
                         'productType' => 'required|string|max:255',
                         'code' => 'required|string|min:5|max:255|unique:product_name,code',
-                ],[
+                ], [
                         'name.required' => 'Vui lòng nhập tên sản phẩm',
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
                         'productType.required' => 'Vui lòng nhập loại sản phẩm.',
                         'code.required' => 'Vui lòng nhập mã sản phẩm.',
                         'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
                         'code.unique' => 'Mã sản phẩm đã tồn tại trong hệ thống.',
-
                 ]);
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'createErrors')->withInput();
+                }
+
                 DB::table('product_name')->insert([
                         'name' => $request->name,
                         'shortName' => $request->shortName,
@@ -41,12 +46,13 @@ class ProductNameController extends Controller
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'created_at' => now(),
                 ]);
-                return redirect()->back()->with('success', 'Đã thêm thành công!');    
+
+                return redirect()->back()->with('success', 'Đã thêm thành công!');
         }
 
         public function update(Request $request){
                
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
                         'productType' => 'required|string|max:255',
@@ -57,9 +63,11 @@ class ProductNameController extends Controller
                         'productType.required' => 'Vui lòng nhập loại sản phẩm.',
                         'code.required' => 'Vui lòng nhập mã sản phẩm.',
                         'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
-                      
-
                 ]);
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
+                } 
 
                DB::table('product_name')->where('id', $request->id)->update([
                         'name' => $request->name,

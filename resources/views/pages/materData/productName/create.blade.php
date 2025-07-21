@@ -32,7 +32,7 @@
             <input type="text" class="form-control" name="code" 
               value="{{ old('code') }}">
           </div>
-          @error('code')
+          @error('code', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
@@ -42,7 +42,7 @@
             <input type="text" class="form-control" name="name" 
               value="{{ old('name') }}">
           </div>
-          @error('name')
+          @error('name', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
@@ -52,7 +52,7 @@
             <input type="text" class="form-control" name="shortName" 
               value="{{ old('shortName') }}">
           </div>
-          @error('shortName')
+          @error('shortName', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
@@ -62,7 +62,7 @@
             <input type="text" class="form-control" name="productType" 
               value="{{ old('productType') }}">
           </div>
-          @error('productType')
+          @error('productType', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
@@ -84,7 +84,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 {{-- //Show modal nếu có lỗi validation --}}
-@if ($errors->any())
+@if ($errors->createErrors->any())
 <script>
     $(document).ready(function () {
         $('#productNameModal').modal('show');

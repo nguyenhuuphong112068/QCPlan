@@ -28,26 +28,31 @@
         
 
             {{-- USER NAME --}}
-            <div class="form-group">
-              <label for="userName">Tên Đăng Nhập</label>
-              <input type="text" class="form-control" name="userName" 
-                value="{{ old('userName') }}" placeholder="Mã Số Nhân Viên">
+              
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="userName">Tên Đăng Nhập</label>
+                    <input type="text" class="form-control" name="userName" 
+                      value="{{ old('userName') }}" placeholder="Mã Số Nhân Viên">
+                  </div>
+                  @error('userName','createErrors')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+
+              </div>
+              <div class="col-md-6">
+                  {{-- PW--}}
+                  <div class="form-group">
+                    <label for="passWord">Mật Khẩu</label>
+                    <input type="text" class="form-control" name="passWord"  
+                      value="{{ old('passWord') }}">
+                  </div>
+                  @error('passWord','createErrors')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
             </div>
-            @error('userName')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-
-            {{-- PW--}}
-            <div class="form-group">
-              <label for="passWord">Mật Khẩu</label>
-              <input type="text" class="form-control" name="passWord"  
-                value="{{ old('passWord') }}">
-            </div>
-            @error('passWord')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
+          </div>
 
            {{-- Full Name--}}
             <div class="form-group">
@@ -55,48 +60,65 @@
               <input type="text" class="form-control" name="fullName"  placeholder="Tên Đầy Đủ"
                 value="{{ old('fullName') }}">
             </div>
-            @error('fullName')
+            @error('fullName','createErrors')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+
+            {{-- USER GROUP --}}
+              <div class="form-group">
+                  <label for="userGroup">Phân Quyền</label>
+                  <select class="form-control" name="userGroup" id="userGroup">
+                      <option value="">-- Chọn phân quyền --</option>
+                      @foreach ($userGroups as $userGroup)
+                          <option value="{{ $userGroup->name }}" 
+                              {{ old('userGroup') == $userGroup->name ? 'selected' : '' }}>
+                              {{ $userGroup->name }}
+                          </option>
+                      @endforeach
+                  </select>
+                  @error('userGroup','createErrors')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                  @enderror
+              </div>
+
+
           <div class="row">
               <div class="col-md-6">
-
-                 {{-- USER GROUP --}}
                 <div class="form-group">
-                    <label for="userGroup">Phân Quyền</label>
-                    <select class="form-control" name="userGroup" id="userGroup">
-                        <option value="">-- Chọn phân quyền --</option>
 
-                        @foreach ($userGroups as $userGroup)
-                            <option value="{{ $userGroup->id }}" 
-                                {{ old('userGroup') == $userGroup->id ? 'selected' : '' }}>
-                                {{ $userGroup->name }}
+                  {{-- GROUP IN DEPARTMENT --}}
+                    <label for="groupName">Tổ</label>
+                    <select class="form-control" name="groupName" id="groupName">
+                        <option value="">-- Chọn Tổ --</option>
+                        @foreach ($groups as $group)
+                            <option value="{{ $group->name }}" 
+                                {{ old('groupName') == $group->name ? 'selected' : '' }}>
+                                {{ $group->name }}
                             </option>
                         @endforeach
                     </select>
-                    @error('userGroup')
-                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                    @error('groupName','createErrors')
+                          <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
-                </div>
-
+                </div>               
               </div>
-
+              
               <div class="col-md-6">
-                  {{-- Deprtment--}}
+                  {{-- DEPARTMENT--}}
                   <div class="form-group">
                       <label for="deparment">Phòng Ban</label>
-                      <select class="form-control" name="belongGroup_id" id="	deparment">
+                      <select class="form-control" name="deparment" id="deparment">
                           <option value="">-- Chọn phòng ban --</option>
 
                           @foreach ($deparments as $department)
-                              <option value="{{ $department->id }}" 
-                                  {{ old('deparment') == $department->id ? 'selected' : '' }}>
+                              <option value="{{ $department->name }}" 
+                                  {{ old('deparment') == $department->name ? 'selected' : '' }}>
                                   {{ $department->name }}
                               </option>
                           @endforeach
                       </select>
 
-                      @error('deparment')
+                      @error('deparment','createErrors')
                           <div class="alert alert-danger mt-1">{{ $message }}</div>
                       @enderror
                   </div>
@@ -109,7 +131,7 @@
               <input type="text" class="form-control" name="mail" placeholder="Không Bắt Buốc"
                 value="{{ old('mail') }}">
             </div>
-            @error('mail')
+            @error('mail','createErrors')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
@@ -132,7 +154,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 {{-- //Show modal nếu có lỗi validation --}}
-@if ($errors->any())
+@if ($errors->createErrors->any())
 <script>
     $(document).ready(function () {
         $('#Modal').modal('show');

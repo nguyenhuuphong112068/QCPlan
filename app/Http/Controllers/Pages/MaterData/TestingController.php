@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages\MaterData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class TestingController extends Controller
 {
@@ -20,7 +21,7 @@ class TestingController extends Controller
     
 
         public function store (Request $request) {
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                         'name' => 'required|string|max:255|unique:testing,name',
                         'shortName' => 'required|string|max:255|unique:testing,shortName',
                     
@@ -30,6 +31,11 @@ class TestingController extends Controller
                         'name.unique' => 'Chỉ tiêu kiểm đã tồn tại trong hệ thống.',
                         'shortName.unique' => 'Tên viết tắt đã tồn tại trong hệ thống.',
                 ]);
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'createErrors')->withInput();
+                }
+
                 DB::table('testing')->insert([
                         'name' => $request->name,
                         'shortName' => $request->shortName,
@@ -42,7 +48,7 @@ class TestingController extends Controller
 
         public function update(Request $request){
                
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
                 ],[
@@ -50,7 +56,11 @@ class TestingController extends Controller
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
                 ]);
 
-               DB::table('testing')->where('id', $request->id)->update([
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
+                } 
+
+                DB::table('testing')->where('id', $request->id)->update([
                         'name' => $request->name,
                         'shortName' => $request->shortName,
                         'active' => true,

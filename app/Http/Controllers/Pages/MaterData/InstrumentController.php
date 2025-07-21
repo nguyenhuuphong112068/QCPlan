@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Pages\MaterData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 class InstrumentController extends Controller
 {
      
@@ -17,9 +19,6 @@ class InstrumentController extends Controller
                 ->where ('Instrument.Active',1)
                 ->leftJoin('groups', 'Instrument.belongGroup_id', '=', 'groups.id')
                 ->orderBy('created_at','desc')->get();
-
-                
-
                 session()->put(['title'=> 'Thiết Bị Kiểm Nghiệm']);
            
                 return view('pages.materData.Instrument.list',['datas' => $datas, 'groups' => $groups]);
@@ -27,19 +26,24 @@ class InstrumentController extends Controller
     
 
         public function store (Request $request) {
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                         'code' => 'required|string|min:5|max:255|unique:instrument,code',
                         'name' => 'required|string|max:255|unique:Instrument,name',
                         'shortName' => 'required|string|max:255|unique:Instrument,shortName',
-                    
+                        'belongGroup_id' => 'required',
                 ],[
                         'code.unique' => 'Mã sản phẩm đã tồn tại trong hệ thống.',
                         'name.required' => 'Vui lòng nhập tên chỉ tiêu kiểm',
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
                         'name.unique' => 'Chỉ tiêu kiểm đã tồn tại trong hệ thống.',
                         'shortName.unique' => 'Tên viết tắt đã tồn tại trong hệ thống.',
-                        
+                        'belongGroup_id.required' => 'Vui lòng chọn tổ quản lý'
                 ]);
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'createErrors')->withInput();
+                }
+
                 DB::table('instrument')->insert([
                         'code' => $request->code,
                         'name' => $request->name,
@@ -54,13 +58,19 @@ class InstrumentController extends Controller
 
         public function update(Request $request){
                
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
+                        'belongGroup_id' => 'required',
                 ],[
                         'name.required' => 'Vui lòng nhập tên chỉ tiêu kiểm',
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
+                        'belongGroup_id.required' => 'Vui lòng chọn tổ quản lý'
                 ]);
+
+                if ($validator->fails()) {
+                        return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
+                } 
 
                DB::table('Instrument')->where('id', $request->id)->update([
                         'code' => $request->code,

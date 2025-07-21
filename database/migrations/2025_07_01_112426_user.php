@@ -16,11 +16,10 @@ return new class extends Migration
             $table->string('userName',10)->unique();
             $table->string('userGroup', 30);
             $table->string('passWord', 255);
-            $table->string('fullName', 20);
-            $table->string('deparment', 500);
+            $table->string('fullName', 255);
+            $table->string('deparment', 50);
             $table->string('groupName', 50);
-            $table->string('groupCode', 5);
-            $table->string('mail', 255)->nullable()->unique();
+            $table->string('mail', 255)->nullable();
 
             $table->boolean('isLocked')->default(false);
             

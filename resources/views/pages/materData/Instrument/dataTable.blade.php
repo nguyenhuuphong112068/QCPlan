@@ -110,8 +110,6 @@
           const button = $(this);
           const modal = $('#UpdateModal');
 
-          console.log ( button.data('code') )
-
           // Gán dữ liệu vào input
           modal.find('input[name="code"]').val(button.data('code'));
           modal.find('input[name="name"]').val(button.data('name'));

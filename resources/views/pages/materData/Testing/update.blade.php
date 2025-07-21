@@ -33,7 +33,7 @@
             <input type="text" class="form-control" name="name" 
               value="{{ old('name') }}">
           </div>
-          @error('name')
+          @error('name', 'updateErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
@@ -43,7 +43,7 @@
             <input type="text" class="form-control" name="shortName" 
               value="{{ old('shortName') }}">
           </div>
-          @error('shortName')
+          @error('shortName', 'updateErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
@@ -62,7 +62,7 @@
 
 
 {{-- //Show modal nếu có lỗi validation --}}
-@if ($errors->any())
+@if ($errors->updateErrors->any())
 <script>
     $(document).ready(function () {
         $('#UpdateModal').modal('show');

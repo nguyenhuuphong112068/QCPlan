@@ -54,8 +54,12 @@
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
                               data-id="{{ $data->id }}"
-                              data-name="{{ $data->userName }}"
-                              
+                              data-userName="{{ $data->userName }}"
+                              data-userGroup="{{ $data->userGroup }}"
+                              data-fullName="{{ $data->fullName }}"
+                              data-deparment="{{ $data->deparment }}"
+                              data-groupName="{{ $data->groupName }}"
+                              data-mail="{{ $data->mail }}"
                               data-toggle="modal"
                               data-target="#UpdateModal">
                               <i class="fas fa-edit"></i>
@@ -65,7 +69,7 @@
 
                       <td class="text-center align-middle">  
 
-                        <form class="form-deActive" action="{{ route('pages.materData.Testing.deActive', ['id' => $data->id]) }}" method="post">
+                        <form class="form-deActive" action="{{ route('pages.User.deActive', ['id' => $data->id]) }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-danger" data-name="{{ $data->userName }}">
                                 <i class="fas fa-trash"></i>
@@ -111,17 +115,16 @@
       $('.btn-edit').click(function () {
           const button = $(this);
           const modal = $('#UpdateModal');
-
-          console.log ( button.data('code') )
-
           // Gán dữ liệu vào input
-          // modal.find('input[name="code"]').val(button.data('code'));
-          // modal.find('input[name="name"]').val(button.data('name'));
-          // modal.find('input[name="shortName"]').val(button.data('shortname'));
-          // modal.find('input[name="productType"]').val(button.data('producttype'));
-          modal.find('input[name="id"]').val(button.data('id'));
+          modal.find('input[name="userName"]').val(button.data('userName'));
+          modal.find('input[name="userGroup"]').val(button.data('userGroup'));
+          modal.find('input[name="fullName"]').val(button.data('fullName'));
+          modal.find('input[name="deparment"]').val(button.data('deparment'));
+          modal.find('input[name="groupName"]').val(button.data('groupName'));
+          modal.find('input[name="mail"]').val(button.data('mail'));
           const id = button.data('id');
 
+          
         });
 
         $('.btn-create').click(function () {
@@ -131,12 +134,12 @@
         $('.form-deActive').on('submit', function (e) {
           e.preventDefault(); // chặn submit mặc định
           const form = this;
-          const productName = $(form).find('button[type="submit"]').data('name');
+          const name = $(form).find('button[type="submit"]').data('userGroup');
          
 
           Swal.fire({
-            title: 'Bạn chắc chắn muốn vô hiệu hóa?',
-            text: `Chỉ Tiêu: ${productName}`,
+            title: 'Bạn chắc chắn muốn vô hiệu?',
+            text: `User: ${name}`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#28a745',
