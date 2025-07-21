@@ -46,8 +46,8 @@ class UserController extends Controller
                 'passWord.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.',
                 
                 'fullName.required' => 'Vui lòng nhập tên đăng nhập.',
-                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
-                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+                'fullName.min' => 'Tên người dùng phải có ít nhất :min ký tự.',
+                'fullName.max' => 'Tên người dùng không vượt quá :max ký tự.',
                 
                 'userGroup.required' => 'Vui lòng chọn phân quyền',
 
@@ -82,10 +82,6 @@ class UserController extends Controller
         public function update(Request $request){
                
                 $validator = Validator::make($request->all(), [
-                'userName' => 'required|string|max:10|min:5|unique:user_management,userName',
-                'passWord' => [
-                        'required','string','min:6','max:255',
-                        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
                 'fullName' => 'required|string|max:255|min:5',
                 'userGroup' => 'required',
                 'deparment' => 'required',
@@ -93,18 +89,11 @@ class UserController extends Controller
                 'groupName' => 'required',
 
                 ], [
-                'userName.required' => 'Vui lòng nhập tên đăng nhập.',
-                'userName.unique' => 'Tên đăng nhập đã tồn tại.',
-                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
-                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+                        
 
-                'passWord.required' => 'Vui lòng nhập mật khẩu.',
-                'passWord.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
-                'passWord.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.',
-                
                 'fullName.required' => 'Vui lòng nhập tên đăng nhập.',
-                'userName.min' => 'Tên đăng nhập phải có ít nhất :min ký tự.',
-                'userName.max' => 'Tên đăng nhập không vượt quá :max ký tự.',
+                'fullName.min' => 'Tên người dùng phải có ít nhất :min ký tự.',
+                'fullName.max' => 'Tên người dùng không vượt quá :max ký tự.',
                 
                 'userGroup.required' => 'Vui lòng chọn phân quyền',
 
@@ -119,18 +108,16 @@ class UserController extends Controller
                 if ($validator->fails()) {
                         return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
                 } 
-
-                DB::table('user_management')->insert([
-                        'userName' => $request->userName,
-                        'passWord' => Hash::make($request->passWord),
+                
+                 DB::table('user_management')->where('id', $request->id)->update([
+                        
                         'fullName' => $request->fullName,
                         'userGroup' => $request->userGroup,
                         'deparment' => $request->deparment,
                         'groupName' => $request->groupName,
                         'mail' => $request->mail,
-                        'changePWdate' => today()->addDays(90),
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
-                        'created_at' => now(),
+                        'updated_at' => now(),
                 ]);
                 return redirect()->back()->with('success', 'Đã thêm thành công!');   
         }

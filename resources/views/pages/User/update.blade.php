@@ -2,7 +2,7 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
    
     <form 
@@ -16,7 +16,7 @@
               <img src="{{ asset('img/iconstella.svg') }}" style="opacity: 0.8 ; max-width:45px;">
           </a>
 
-          <h4 class="modal-title w-100 text-center" id="pModalLabel" style="color: #CDC717">
+          <h4 class="modal-title w-100 text-center" id="ModalLabel" style="color: #CDC717">
               {{'Cập Nhật User' }}
           </h4>
 
@@ -27,17 +27,17 @@
 
         <div class="modal-body">
         
-
+        <input type="hidden" class="form-control" name="id" value="">
         {{-- USER NAME --}}
               
           <div class="row">
               <div class="col-md-6">
                   <div class="form-group">
                     <label for="userName">Tên Đăng Nhập</label>
-                    <input type="text" class="form-control" name="userName" 
+                    <input type="text" class="form-control" name="userName"  disabled
                       value="{{ old('userName') }}" placeholder="Mã Số Nhân Viên">
                   </div>
-                  @error('userName','createErrors')
+                  @error('userName','updateErrors')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
 
@@ -46,10 +46,10 @@
                   {{-- PW--}}
                   <div class="form-group">
                     <label for="passWord">Mật Khẩu</label>
-                    <input type="text" class="form-control" name="passWord"  
-                      value="{{ old('passWord') }}">
+                    <input type="text" class="form-control" name="passWord"  disabled 
+                      value=" ***** ">
                   </div>
-                  @error('passWord','createErrors')
+                  @error('passWord','updateErrors')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
             </div>
@@ -61,7 +61,7 @@
               <input type="text" class="form-control" name="fullName"  placeholder="Tên Đầy Đủ"
                 value="{{ old('fullName') }}">
             </div>
-            @error('fullName','createErrors')
+            @error('fullName','updateErrors')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
@@ -77,7 +77,7 @@
                           </option>
                       @endforeach
                   </select>
-                  @error('userGroup','createErrors')
+                  @error('userGroup','updateErrors')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                   @enderror
               </div>
@@ -98,7 +98,7 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('groupName','createErrors')
+                    @error('groupName','updateErrors')
                           <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>               
@@ -119,7 +119,7 @@
                           @endforeach
                       </select>
 
-                      @error('deparment','createErrors')
+                      @error('deparment','updateErrors')
                           <div class="alert alert-danger mt-1">{{ $message }}</div>
                       @enderror
                   </div>

@@ -92,7 +92,13 @@
 
 @if (session('success'))
 <script>
-    Swal.fire('Thành công!', '{{ session('success') }}', 'success');
+    Swal.fire({
+        title: 'Thành công!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        timer: 2000, // tự đóng sau 2 giây
+        showConfirmButton: false
+    });
 </script>
 @endif
 

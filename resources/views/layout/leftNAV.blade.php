@@ -120,6 +120,16 @@
             </a>
           </li>
 
+          <!-- User-->
+          <li class="nav-item">
+            <a href="{{ route ('pages.AuditTrail.list') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Audit Trail
+              </p>
+            </a>
+          </li>
+
           <!-- One Menu -->
           {{-- <li class="nav-item">
             <a href="../widgets.html" class="nav-link">

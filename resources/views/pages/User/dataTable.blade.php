@@ -54,11 +54,11 @@
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
                               data-id="{{ $data->id }}"
-                              data-userName="{{ $data->userName }}"
-                              data-userGroup="{{ $data->userGroup }}"
-                              data-fullName="{{ $data->fullName }}"
+                              data-username="{{ $data->userName }}"
+                              data-usergroup="{{ $data->userGroup }}"
+                              data-fullname="{{ $data->fullName }}"
                               data-deparment="{{ $data->deparment }}"
-                              data-groupName="{{ $data->groupName }}"
+                              data-groupname="{{ $data->groupName }}"
                               data-mail="{{ $data->mail }}"
                               data-toggle="modal"
                               data-target="#UpdateModal">
@@ -104,7 +104,13 @@
 
 @if (session('success'))
 <script>
-    Swal.fire('Thành công!', '{{ session('success') }}', 'success');
+    Swal.fire({
+        title: 'Thành công!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        timer: 2000, // tự đóng sau 2 giây
+        showConfirmButton: false
+    });
 </script>
 @endif
 
@@ -116,12 +122,14 @@
           const button = $(this);
           const modal = $('#UpdateModal');
           // Gán dữ liệu vào input
-          modal.find('input[name="userName"]').val(button.data('userName'));
-          modal.find('input[name="userGroup"]').val(button.data('userGroup'));
-          modal.find('input[name="fullName"]').val(button.data('fullName'));
-          modal.find('input[name="deparment"]').val(button.data('deparment'));
-          modal.find('input[name="groupName"]').val(button.data('groupName'));
+          modal.find('input[name="id"]').val(button.data('id'));
+          modal.find('input[name="userName"]').val(button.data('username'));
+          modal.find('select[name="userGroup"]').val(button.data('usergroup'));
+          modal.find('input[name="fullName"]').val(button.data('fullname'));
+          modal.find('select[name="deparment"]').val(button.data('deparment'));
+          modal.find('select[name="groupName"]').val(button.data('groupname'));
           modal.find('input[name="mail"]').val(button.data('mail'));
+
           const id = button.data('id');
 
           

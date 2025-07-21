@@ -7,14 +7,6 @@ use App\Http\Middleware\CheckLogin;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::get('/DhtmlxGantt', [ControllersHomeController::class, 'index']);
-
-// Route::get('/gantt-advanced', function () {
-//         return Inertia::render('DhtmlxGantt');
-// });
-
-
-
 Route::get('/', [LoginController::class, 'showLogin']);
 Route::post('/', [LoginController::class, 'login'])->name('login');
 

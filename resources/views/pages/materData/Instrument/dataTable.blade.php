@@ -98,7 +98,13 @@
 
 @if (session('success'))
 <script>
-    Swal.fire('Thành công!', '{{ session('success') }}', 'success');
+    Swal.fire({
+        title: 'Thành công!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        timer: 2000, // tự đóng sau 2 giây
+        showConfirmButton: false
+    });
 </script>
 @endif
 
@@ -115,7 +121,7 @@
           modal.find('input[name="name"]').val(button.data('name'));
           modal.find('input[name="shortName"]').val(button.data('shortname'));
           modal.find('input[name="id"]').val(button.data('id'));
-          modal.find('input[name="belongGroup_id"]').val(button.data('groupName'));
+          modal.find('select[name="belongGroup_id"]').val(button.data('groupName'));
           const id = button.data('id');
 
         });
