@@ -20,12 +20,14 @@
               Cập Nhật Tên Sản Phẩm
           </h4>
 
-          <input type="hidden" class="form-control" name="id" value="">
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
+          {{-- ID --}}
+        <input type="hidden" class="form-control" name="id" value="">
 
         <div class="modal-body">
               {{-- CODE --}}

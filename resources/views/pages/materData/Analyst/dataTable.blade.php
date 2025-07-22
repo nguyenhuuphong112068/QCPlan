@@ -15,7 +15,7 @@
               <!-- /.card-Body -->
               <div class="card-body">
 
-                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#productNameModal" style="width: 155px" >
+                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#Modal" style="width: 155px" >
                       <i class="fas fa-plus"></i> Thêm
                 </button>
 
@@ -25,10 +25,9 @@
                 
                     <tr>
                     <th>STT</th>
-                    {{-- <th>Mã Sản Phẩm</th> --}}
-                    <th>Tên Sản Phẩm</th>
-                    <th>Tên Viết Tắt</th>
-                    <th>Loại Sản Phẩm</th>
+                    <th>Mã Số Nhân Viên</th>
+                    <th>Tên Kiểm Nghiện Viên</th>
+                    <th>Tổ</th>
                     <th>Người Tạo</th>
                     <th>Ngày Tạo</th>
                     <th>Edit</th>
@@ -40,22 +39,20 @@
                   @foreach ($datas as $data)
                     <tr>
                       <td>{{ $loop->iteration}} </td>
-                      {{-- <td>{{ $data->code}}</td> --}}
-                      <td>{{ $data->name}}</td>
-                      <td>{{ $data->shortName}}</td>
-                      <td>{{ $data->productType}}</td>
+                      <td>{{ $data->code}}</td>
+                      <td>{{ $data->fullName}}</td>
+                      <td>{{ $data->groupName}}</td>
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
                       
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
                               data-id="{{ $data->id }}"
-                              {{-- data-code="{{ $data->code }}" --}}
-                              data-name="{{ $data->name }}"
-                              data-shortname="{{ $data->shortName }}"
-                              data-producttype="{{ $data->productType }}"
+                              data-code="{{$data->code}}"
+                              data-full-name="{{$data->fullName}}"
+                              data-group-name="{{$data->groupName}}"
                               data-toggle="modal"
-                              data-target="#productNameUpdateModal">
+                              data-target="#UpdateModal">
                               <i class="fas fa-edit"></i>
                           </button>
                       </td>
@@ -63,9 +60,9 @@
 
                       <td class="text-center align-middle">  
 
-                        <form class="form-deActive" action="{{ route('pages.materData.productName.deActive', ['id' => $data->id]) }}" method="post">
+                        <form class="form-deActive" action="{{ route('pages.materData.Analyst.deActive', ['id' => $data->id]) }}" method="post">
                             @csrf
-                            <button type="submit" class="btn btn-danger" data-name="{{ $data->name }}">
+                            <button type="submit" class="btn btn-danger" data-fullName="{{ $data->fullName }}">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
@@ -114,33 +111,32 @@
 
       $('.btn-edit').click(function () {
           const button = $(this);
-          const modal = $('#productNameUpdateModal');
+          const modal = $('#UpdateModal');
 
           console.log ( button.data('code') )
 
           // Gán dữ liệu vào input
-          // modal.find('input[name="code"]').val(button.data('code'));
-          modal.find('input[name="name"]').val(button.data('name'));
-          modal.find('input[name="shortName"]').val(button.data('shortname'));
-          modal.find('input[name="productType"]').val(button.data('producttype'));
+          modal.find('input[name="code"]').val(button.data('code'));
+          modal.find('input[name="fullName"]').val(button.data('fullName'));
+          modal.find('select[name="groupName"]').val(button.data('groupName'));
           modal.find('input[name="id"]').val(button.data('id'));
           const id = button.data('id');
 
         });
 
         $('.btn-create').click(function () {
-          const modal = $('#productNameModal');
+          const modal = $('#Modal');
         });
 
         $('.form-deActive').on('submit', function (e) {
           e.preventDefault(); // chặn submit mặc định
-           const form = this;
-          const productName = $(form).find('button[type="submit"]').data('name');
+          const form = this;
+          const fullName = $(form).find('button[type="submit"]').data('fullName');
          
 
           Swal.fire({
             title: 'Bạn chắc chắn muốn vô hiệu hóa?',
-            text: `Sản phẩm: ${productName}`,
+            text: `Kiểm Nghiệm Viên: ${fullName}`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#28a745',

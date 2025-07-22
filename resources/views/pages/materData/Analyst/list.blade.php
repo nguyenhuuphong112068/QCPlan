@@ -5,15 +5,15 @@
     @include('layout.topNAV')
 @endsection
 
-
 @section('leftNAV')
     @include('layout.leftNAV')
 @endsection
  
 @section('mainContent')
-  @include('pages.materData.productName.dataTable')
+  @include('pages.materData.Analyst.dataTable')
 @endsection
+
 @section('model')
-  @include('pages.materData.productName.create')
-  @include('pages.materData.productName.update') 
+  @include('pages.materData.Analyst.create')
+  @include('pages.materData.Analyst.update') 
 @endsection

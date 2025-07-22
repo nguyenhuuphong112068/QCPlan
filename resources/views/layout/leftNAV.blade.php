@@ -58,7 +58,7 @@
               </li> 
 
               <li class="nav-item">
-                <a href="{{ route ('pages.materData.Testing.list') }}" class="nav-link">
+                <a href="{{ route ('pages.materData.Analyst.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kiểm Nghiêm Viên</p>
                 </a>
@@ -74,40 +74,59 @@
               
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Danh Mục Sản Phẩm
+                Danh Mục 
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             
             <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="{{ route ('pages.category.SOP.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Qui Trình Kiểm Nghiệm</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Danh Sách Sản Phẩm</p>
+                  <p>Sản Phẩm</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh Sách Thiết Bị</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dánh Sách Kiểm Nghiệm Viên</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Định Mức Kiểm Nghiệm</p>
-                </a>
-              </li>
+
             </ul>
           </li>
 
+            <!-- Droplist Định Mức Kiểm Nghiệm -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Định Mức
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Định mức 1</p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Định mức 2</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
 
 
             <!-- User-->
@@ -120,7 +139,7 @@
             </a>
           </li>
 
-          <!-- User-->
+          <!-- Audit Trial-->
           <li class="nav-item">
             <a href="{{ route ('pages.AuditTrail.list') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -130,17 +149,6 @@
             </a>
           </li>
 
-          <!-- One Menu -->
-          {{-- <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Audit Trail
-                {{-- <span class="right badge badge-danger">New</span> 
-              </p>
-            </a>
-          </li> --}}
-          
         </ul>
       </nav>
 

@@ -23,14 +23,14 @@ class ProductNameController extends Controller
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
                         'productType' => 'required|string|max:255',
-                        'code' => 'required|string|min:5|max:255|unique:product_name,code',
+                        //'code' => 'required|string|min:5|max:255|unique:product_name,code',
                 ], [
                         'name.required' => 'Vui lòng nhập tên sản phẩm',
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
                         'productType.required' => 'Vui lòng nhập loại sản phẩm.',
-                        'code.required' => 'Vui lòng nhập mã sản phẩm.',
-                        'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
-                        'code.unique' => 'Mã sản phẩm đã tồn tại trong hệ thống.',
+                        //'code.required' => 'Vui lòng nhập mã sản phẩm.',
+                        //'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
+                        //'code.unique' => 'Mã sản phẩm đã tồn tại trong hệ thống.',
                 ]);
 
                 if ($validator->fails()) {
@@ -41,7 +41,7 @@ class ProductNameController extends Controller
                         'name' => $request->name,
                         'shortName' => $request->shortName,
                         'productType' => $request->productType,
-                        'code' => $request->code,
+                        // 'code' => $request->code,
                         'active' => true,
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'created_at' => now(),
@@ -56,13 +56,13 @@ class ProductNameController extends Controller
                         'name' => 'required|string|max:255',
                         'shortName' => 'required|string|max:255',
                         'productType' => 'required|string|max:255',
-                        'code' => 'required|string|min:5|max:255',
+                        // 'code' => 'required|string|min:5|max:255',
                 ],[
                         'name.required' => 'Vui lòng nhập tên sản phẩm',
                         'shortName.required' => 'Vui lòng nhập tên viết tắt.',
                         'productType.required' => 'Vui lòng nhập loại sản phẩm.',
-                        'code.required' => 'Vui lòng nhập mã sản phẩm.',
-                        'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
+                        // 'code.required' => 'Vui lòng nhập mã sản phẩm.',
+                        // 'code.min' => 'Mã sản phẩm phải có ít nhất :min ký tự.',
                 ]);
 
                 if ($validator->fails()) {
@@ -73,7 +73,7 @@ class ProductNameController extends Controller
                         'name' => $request->name,
                         'shortName' => $request->shortName,
                         'productType' => $request->productType,
-                        'code' => $request->code,
+                        //'code' => $request->code,
                         'active' => true,
                         'prepareBy' => session('user')['fullName'],
                         'updated_at' => now(), 

@@ -66,7 +66,7 @@
           
                <!-- KNV -->
           <li class="nav-item">
-            <a href="{{route ('pages.materData.Groups.list')}}" class="nav-link">
+            <a href="{{route ('pages.materData.Analyst.list')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Kiểm Nghiệm Viên

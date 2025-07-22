@@ -25,7 +25,7 @@
                 
                     <tr>
                     <th>STT</th>
-                    {{-- <th>Mã Sản Phẩm</th> --}}
+                    <th>Mã Sản Phẩm</th>
                     <th>Tên Sản Phẩm</th>
                     <th>Tên Viết Tắt</th>
                     <th>Loại Sản Phẩm</th>

@@ -2,8 +2,8 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 <!-- Modal -->
-<div class="modal fade" id="productNameModal" tabindex="-1" role="dialog" aria-labelledby="productNameModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade " id="productNameModal" tabindex="-1" role="dialog" aria-labelledby="productNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
    
     <form 
       action="{{route('pages.materData.productName.store')}}" 
@@ -17,7 +17,7 @@
           </a>
 
           <h4 class="modal-title w-100 text-center" id="productNameModalLabel" style="color: #CDC717">
-              {{'Tạo Mới Tên Sản Phẩm' }}
+              {{'Tạo Mới Qui Trình Kiểm Nghiệm' }}
           </h4>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
@@ -27,44 +27,51 @@
 
         <div class="modal-body">
           {{-- CODE --}}
-          {{-- <div class="form-group">
-            <label for="code">Mã Sản Phẩm</label>
+          <div class="form-group">
+            <label for="code">Số Qui Trình</label>
             <input type="text" class="form-control" name="code" 
               value="{{ old('code') }}">
           </div>
           @error('code', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
-          @enderror --}}
+          @enderror
 
           {{-- NAME --}}
           <div class="form-group">
-            <label for="name">Tên Sản Phẩm</label>
+            <label for="name">Tên Qui Trình</label>
             <input type="text" class="form-control" name="name" 
               value="{{ old('name') }}">
           </div>
           @error('name', 'createErrors')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
+             
+            {{-- USER GROUP --}}
+            <div class="form-group">
+                <label for="testing">Chỉ Tiêu</label>
+                <select class="form-control" name="testing" id="testing" multiple>
+                    @foreach ($testings as $testing)
+                        <option value="{{ $testing->name }}" 
+                            {{ old('userGroup') == $testing->name ? 'selected' : '' }}>
+                            {{ $testing->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('testing','createErrors')
+                      <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
-          {{-- SHORT NAME --}}
-          <div class="form-group">
-            <label for="shortName">Tên viết tắt</label>
-            <input type="text" class="form-control" name="shortName" 
-              value="{{ old('shortName') }}">
-          </div>
-          @error('shortName', 'createErrors')
-              <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
+            
 
-          {{-- PRODUCT TYPE --}}
-          <div class="form-group">
-            <label for="productType">Loại Sản Phẩm</label>
-            <input type="text" class="form-control" name="productType" 
-              value="{{ old('productType') }}">
-          </div>
-          @error('productType', 'createErrors')
-              <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
+      
+
+
+          
+
+
+
+ 
         </div>
 
         <div class="modal-footer">

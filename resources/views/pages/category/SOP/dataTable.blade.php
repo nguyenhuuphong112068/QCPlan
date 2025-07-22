@@ -25,11 +25,8 @@
                 
                     <tr>
                     <th>STT</th>
-                    {{-- <th>Mã Sản Phẩm</th> --}}
-                    <th>Tên Sản Phẩm</th>
-                    <th>Tên Viết Tắt</th>
-                    <th>Loại Sản Phẩm</th>
-                    <th>Người Tạo</th>
+                    <th>Số Qui Trình</th>
+                    <th>Tên Qui Trình</th>
                     <th>Ngày Tạo</th>
                     <th>Edit</th>
                     <th>DeActive</th>
@@ -41,19 +38,17 @@
                     <tr>
                       <td>{{ $loop->iteration}} </td>
                       {{-- <td>{{ $data->code}}</td> --}}
+                      <td>{{ $data->code}}</td>
                       <td>{{ $data->name}}</td>
-                      <td>{{ $data->shortName}}</td>
-                      <td>{{ $data->productType}}</td>
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
                       
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
                               data-id="{{ $data->id }}"
-                              {{-- data-code="{{ $data->code }}" --}}
                               data-name="{{ $data->name }}"
-                              data-shortname="{{ $data->shortName }}"
-                              data-producttype="{{ $data->productType }}"
+                              data-code="{{ $data->code }}"
+                             
                               data-toggle="modal"
                               data-target="#productNameUpdateModal">
                               <i class="fas fa-edit"></i>
@@ -119,9 +114,9 @@
           console.log ( button.data('code') )
 
           // Gán dữ liệu vào input
-          // modal.find('input[name="code"]').val(button.data('code'));
+          modal.find('input[name="code"]').val(button.data('code'));
           modal.find('input[name="name"]').val(button.data('name'));
-          modal.find('input[name="shortName"]').val(button.data('shortname'));
+         
           modal.find('input[name="productType"]').val(button.data('producttype'));
           modal.find('input[name="id"]').val(button.data('id'));
           const id = button.data('id');

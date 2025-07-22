@@ -11,7 +11,7 @@ class GroupsController extends Controller
         public function index(){
 
                 $datas = DB::table('groups')->where ('Active',1)->orderBy('created_at','desc')->get();
-                session()->put(['title'=> 'Chỉ Tiêu Kiểm']);
+                session()->put(['title'=> 'Tổ Kiểm Nghiệm']);
            
                 return view('pages.materData.Groups.list',['datas' => $datas]);
         }

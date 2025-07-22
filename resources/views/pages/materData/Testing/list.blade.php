@@ -6,7 +6,7 @@
 @endsection
 
 @section('leftNAV')
-    @include('pages.materData.layout.leftNAV_DataMaster')
+    @include('layout.leftNAV')
 @endsection
  
 @section('mainContent')
