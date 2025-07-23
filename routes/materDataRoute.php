@@ -19,9 +19,7 @@ Route::prefix('/materData')
     ->controller(ProductNameController::class)
     ->group(function(){
             Route::get('','index')->name('list');
-            Route::get('create','showCreateProductNameForm')->name('create');
             Route::post('store','store')->name('store');
-            Route::get('detail/{id}', 'detail')->name('detail');
             Route::post('update', 'update')->name('update');
             Route::post('deActive/{id}','deActive')->name('deActive'); 
     });
@@ -31,9 +29,7 @@ Route::prefix('/materData')
     ->controller(TestingController::class)
     ->group(function(){
             Route::get('','index')->name('list');
-            Route::get('create','showCreateProductNameForm')->name('create');
             Route::post('store','store')->name('store');
-            Route::get('detail/{id}', 'detail')->name('detail');
             Route::post('update', 'update')->name('update');
             Route::post('deActive/{id}','deActive')->name('deActive');     
     });
@@ -43,9 +39,7 @@ Route::prefix('/materData')
     ->controller(InstrumentController::class)
     ->group(function(){
             Route::get('','index')->name('list');
-            Route::get('create','showCreateProductNameForm')->name('create');
             Route::post('store','store')->name('store');
-            Route::get('detail/{id}', 'detail')->name('detail');
             Route::post('update', 'update')->name('update');
             Route::post('deActive/{id}','deActive')->name('deActive');          
     });
@@ -55,9 +49,7 @@ Route::prefix('/materData')
     ->controller(GroupsController::class)
     ->group(function(){
             Route::get('','index')->name('list');
-            Route::get('create','showCreateProductNameForm')->name('create');
             Route::post('store','store')->name('store');
-            Route::get('detail/{id}', 'detail')->name('detail');
             Route::post('update', 'update')->name('update');
             Route::post('deActive/{id}','deActive')->name('deActive');          
     });
@@ -67,9 +59,7 @@ Route::prefix('/materData')
     ->controller(AnalystController::class)
     ->group(function(){
             Route::get('','index')->name('list');
-            Route::get('create','showCreateProductNameForm')->name('create');
             Route::post('store','store')->name('store');
-            Route::get('detail/{id}', 'detail')->name('detail');
             Route::post('update', 'update')->name('update');
             Route::post('deActive/{id}','deActive')->name('deActive');          
     });

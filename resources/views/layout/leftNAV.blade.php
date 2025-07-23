@@ -82,29 +82,25 @@
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <a href="{{ route ('pages.category.SOP.list') }}" class="nav-link">
+                <a href="{{ route ('pages.category.product.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Qui Trình Kiểm Nghiệm</p>
+                  <p>Sản Phẩm KN</p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sản Phẩm</p>
-                </a>
-              </li>
 
             </ul>
           </li>
 
-            <!-- Droplist Định Mức Kiểm Nghiệm -->
+
+          
+            <!-- Droplist Menu Nhận Mẫu -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Định Mức
+                Nhận Mẫu
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -112,18 +108,12 @@
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route ('pages.Import.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Định mức 1</p>
+                  <p>Danh Sách Mẫu Chờ Kiểm </p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Định mức 2</p>
-                </a>
-              </li>
 
             </ul>
           </li>

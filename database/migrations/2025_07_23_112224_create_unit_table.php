@@ -10,16 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('product_name', function (Blueprint $table) {
+    {   
+        Schema::create('unit', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string ('shortName' , 255);
-            $table->string ('productType', 100);
-            $table->string('prepareBy');
-            $table->boolean ('active');
+            $table->string('code')->unique();
+            $table->string('name',20)->unique(); 
+            $table->string('prepareBy', 100);
+            $table->boolean ('active')->default(true);
             $table->timestamps();
         });
+
+
     }
 
     /**
@@ -27,8 +28,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product_name', function (Blueprint $table) {
-            Schema::dropIfExists('product_name');
+
+        Schema::table('unit', function (Blueprint $table) {
+            Schema::dropIfExists('unit');
         });
     }
 };

@@ -15,7 +15,7 @@
               <!-- /.card-Body -->
               <div class="card-body">
 
-                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#productNameModal" style="width: 155px" >
+                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#selectProductModal" style="width: 155px" >
                       <i class="fas fa-plus"></i> Thêm
                 </button>
 
@@ -25,14 +25,16 @@
                 
                     <tr>
                     <th>STT</th>
-                    <th>Mã Sản Phẩm</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Tên Viết Tắt</th>
-                    <th>Loại Sản Phẩm</th>
+                    <th>Sản Phẩm</th>
+                    <th>Số lô - Công Đoạn</th>
+                    <th>Chỉ tiêu</th>
+                    <th>Số lượng mẫu nhận</th>
+                    <th>Ngày Trả Kết Quả</th>
+                    <th>Đã Sắp lịch</th>
                     <th>Người Tạo</th>
                     <th>Ngày Tạo</th>
                     <th>Edit</th>
-                    <th>DeActive</th>
+                    <th>Hủy mẫu</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -41,21 +43,34 @@
                     <tr>
                       <td>{{ $loop->iteration}} </td>
                       {{-- <td>{{ $data->code}}</td> --}}
-                      <td>{{ $data->name}}</td>
-                      <td>{{ $data->shortName}}</td>
-                      <td>{{ $data->productType}}</td>
+                      <td>{{ $data->code ." - ". $data->name}}</td>
+                      <td>{{ $data->batch ." - ". $data->stage}}</td>
+                      <td>{{ $data->testing}}</td>
+                      <td>{{ $data->sample_Amout . " " . $data->unit}}</td>
+                      <td>{{ $data->experted_date}}  h</td>
+                      <td>
+                        <div class="icheck-primary d-inline">
+                          <input type="checkbox" id="" checked>
+                      </div>
+                      </td>                     
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
                       
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
+
                               data-id="{{ $data->id }}"
-                              {{-- data-code="{{ $data->code }}" --}}
                               data-name="{{ $data->name }}"
-                              data-shortname="{{ $data->shortName }}"
-                              data-producttype="{{ $data->productType }}"
+                              data-code="{{ $data->code }}"
+                              data-testing="{{ $data->testing }}"
+                              data-sample_amout="{{ $data->sample_Amout }}"
+                              data-unit="{{ $data->unit }}"
+                              data-excution-time="{{ $data->excution_time }}"
+                              data-instrument="{{ $data->instrument }}"
+                              
+                              
                               data-toggle="modal"
-                              data-target="#productNameUpdateModal">
+                              data-target="#updateModal">
                               <i class="fas fa-edit"></i>
                           </button>
                       </td>
@@ -63,7 +78,7 @@
 
                       <td class="text-center align-middle">  
 
-                        <form class="form-deActive" action="{{ route('pages.materData.productName.deActive', ['id' => $data->id]) }}" method="post">
+                        <form class="form-deActive" action="{{ route('pages.category.product.deActive', ['id' => $data->id]) }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-danger" data-name="{{ $data->name }}">
                                 <i class="fas fa-trash"></i>
@@ -114,16 +129,20 @@
 
       $('.btn-edit').click(function () {
           const button = $(this);
-          const modal = $('#productNameUpdateModal');
-
+          const modal = $('#updateModal');
+          
           console.log ( button.data('code') )
 
           // Gán dữ liệu vào input
-          // modal.find('input[name="code"]').val(button.data('code'));
-          modal.find('input[name="name"]').val(button.data('name'));
-          modal.find('input[name="shortName"]').val(button.data('shortname'));
-          modal.find('input[name="productType"]').val(button.data('producttype'));
           modal.find('input[name="id"]').val(button.data('id'));
+          modal.find('input[name="code"]').val(button.data('code'));
+          modal.find('input[name="name"]').val(button.data('name'));
+          modal.find('input[name="testing"]').val(button.data('testing'));
+          modal.find('input[name="sample_Amout"]').val(button.data('sample_amout'));
+          modal.find('input[name="unit"]').val(button.data('unit'));
+          modal.find('input[name="excution_time"]').val(button.data('excution-time'));
+          modal.find('input[name="instrument"]').val(button.data('instrument'));
+
           const id = button.data('id');
 
         });

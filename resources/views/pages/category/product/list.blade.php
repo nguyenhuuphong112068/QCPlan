@@ -11,9 +11,9 @@
 @endsection
  
 @section('mainContent')
-  @include('pages.materData.productName.dataTable')
+  @include('pages.category.product.dataTable')
 @endsection
 @section('model')
-  @include('pages.materData.productName.create')
-  @include('pages.materData.productName.update') 
+  @include('pages.category.product.create')
+  @include('pages.category.product.update') 
 @endsection

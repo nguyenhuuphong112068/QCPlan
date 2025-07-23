@@ -1,31 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Pages\Caterogy;
+namespace App\Http\Controllers\Pages\Import;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
-class SOPCategoryController extends Controller
+class ImportController extends Controller
 {
-        public function index2() {
-                return Inertia::render('category/SOP/list'); // ✅ không có dấu /
-        }
-        
-        public function index(){
+           public function index(){
 
-                // $groups = DB::table('groups')->where('active', true)->get();
-                // $deparments = DB::table('deparments')->where('active', true)->get();
+                $category = DB::table('product_category')->where ('active',1)->orderBy('created_at','desc')->get();
 
-                $testings = DB::table('testing')->where('active', true)->get();
-
-                $datas = DB::table('sop_category')->where ('active',1)->orderBy('created_at','desc')->get();
+                $datas = DB::table('import')
+                ->select('import.*', 'product_category.name', 'product_category.testing','product_category.testing_code', 'product_category.sample_Amout', 'product_category.unit')
+                ->where ('import.Active',1)
+                ->leftJoin('product_category', 'import.testing_code', 'product_category.testing_code')
+                ->orderBy('created_at','desc')->get();
+               
                 
-                session()->put(['title'=> 'DANH MỤC QUI TRÌNH KIỂM NGHIỆM']);
-           
-                return view('pages.category.SOP.list',['datas' => $datas,'testings' => $testings]);
+                session()->put(['title'=> 'Danh Sách Mẫu Chờ Kiểm']);
+  
+                return view('pages.Import.list',['datas' => $datas,'category' => $category ]);
         }
     
 
@@ -72,7 +69,6 @@ class SOPCategoryController extends Controller
 
                 DB::table('user_management')->insert([
                         'userName' => $request->userName,
-                     
                         'fullName' => $request->fullName,
                         'userGroup' => $request->userGroup,
                         'deparment' => $request->deparment,

@@ -11,9 +11,13 @@
 @endsection
  
 @section('mainContent')
-  @include('pages.materData.productName.dataTable')
+  @include('pages.Import.dataTable')
 @endsection
 @section('model')
-  @include('pages.materData.productName.create')
-  @include('pages.materData.productName.update') 
+  @include('pages.Import.category') 
+  @include('pages.Import.create')
+
+  
+ 
+  {{-- @include('pages.Import.update')  --}}
 @endsection

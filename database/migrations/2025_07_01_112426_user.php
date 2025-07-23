@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('hisPW_1', 20)->nullable();
             $table->string('hisPW_2', 20)->nullable();
             $table->string('hisPW_3', 20)->nullable();
-
+            $table->string('prepareBy');
             $table->timestamps();
         });
     }

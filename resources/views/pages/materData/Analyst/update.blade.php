@@ -90,7 +90,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 {{-- //Show modal nếu có lỗi validation --}}
-@if ($errors->createErrors->any())
+@if ($errors->updateErrors->any())
 <script>
     $(document).ready(function () {
         $('#UpdateModal').modal('show');
