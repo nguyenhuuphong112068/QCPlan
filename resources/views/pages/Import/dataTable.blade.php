@@ -31,8 +31,8 @@
                     <th>Số lượng mẫu nhận</th>
                     <th>Ngày Trả Kết Quả</th>
                     <th>Đã Sắp lịch</th>
-                    <th>Người Tạo</th>
-                    <th>Ngày Tạo</th>
+                    <th>Người Nhận</th>
+                    <th>Ngày Nhận</th>
                     <th>Edit</th>
                     <th>Hủy mẫu</th>
                   </tr>
@@ -44,14 +44,16 @@
                       <td>{{ $loop->iteration}} </td>
                       {{-- <td>{{ $data->code}}</td> --}}
                       <td>{{ $data->code ." - ". $data->name}}</td>
-                      <td>{{ $data->batch ." - ". $data->stage}}</td>
+                      <td>{{ $data->batch_no ." - ". $data->stage}}</td>
                       <td>{{ $data->testing}}</td>
-                      <td>{{ $data->sample_Amout . " " . $data->unit}}</td>
-                      <td>{{ $data->experted_date}}  h</td>
+                      <td>{{ $data->imoported_amount . " " . $data->unit}}</td>
+                       <td>{{ \Carbon\Carbon::parse($data->experted_date)->format('d/m/Y') }}</td>
                       <td>
-                        <div class="icheck-primary d-inline">
-                          <input type="checkbox" id="" checked>
-                      </div>
+                        <div class="text-center">
+                            <div class="icheck-primary d-inline"  >
+                                <input type="checkbox" id="" {{ $data->scheduled !== 0 ? 'checked' : '' }} disabled >
+                            </div>
+                        </div>
                       </td>                     
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
@@ -59,19 +61,20 @@
                       <td class="text-center align-middle">
                           <button type="button" class="btn btn-warning btn-edit"
 
-                              data-id="{{ $data->id }}"
-                              data-name="{{ $data->name }}"
-                              data-code="{{ $data->code }}"
-                              data-testing="{{ $data->testing }}"
-                              data-sample_amout="{{ $data->sample_Amout }}"
-                              data-unit="{{ $data->unit }}"
-                              data-excution-time="{{ $data->excution_time }}"
-                              data-instrument="{{ $data->instrument }}"
+                            data-id="{{ $data->id }}"
+                            data-code="{{ $data->code }}"
+                            data-name="{{ $data->name }}"
+                            data-testing="{{ $data->testing }}"
+                            data-unit="{{ $data->unit }}"
+                            data-imoported_amount	="{{ $data->imoported_amount}}"
+                            data-batch_no="{{ $data->batch_no}}"
+                            data-stage="{{ $data->stage}}"
+                            data-experted_date="{{ $data->experted_date}}"
                               
                               
-                              data-toggle="modal"
-                              data-target="#updateModal">
-                              <i class="fas fa-edit"></i>
+                            data-toggle="modal"
+                            data-target="#updateModal">
+                            <i class="fas fa-edit"></i>
                           </button>
                       </td>
 
@@ -127,31 +130,32 @@
 
   $(document).ready(function () {
 
-      $('.btn-edit').click(function () {
-          const button = $(this);
-          const modal = $('#updateModal');
-          
-          console.log ( button.data('code') )
-
-          // Gán dữ liệu vào input
-          modal.find('input[name="id"]').val(button.data('id'));
-          modal.find('input[name="code"]').val(button.data('code'));
-          modal.find('input[name="name"]').val(button.data('name'));
-          modal.find('input[name="testing"]').val(button.data('testing'));
-          modal.find('input[name="sample_Amout"]').val(button.data('sample_amout'));
-          modal.find('input[name="unit"]').val(button.data('unit'));
-          modal.find('input[name="excution_time"]').val(button.data('excution-time'));
-          modal.find('input[name="instrument"]').val(button.data('instrument'));
-
-          const id = button.data('id');
-
-        });
-
-        $('.btn-create').click(function () {
+      $('.btn-create').click(function () {
           const modal = $('#productNameModal');
-        });
+      });
 
-        $('.form-deActive').on('submit', function (e) {
+      $('.btn-edit').click(function () {
+
+      const button = $(this);
+      const updateModal = $('#updateModal');
+      updateModal.modal('show');
+
+      // Gán dữ liệu vào modal mới (nếu cần)
+      updateModal.find('input[name="id"]').val(button.data('id'));
+      updateModal.find('input[name="code"]').val(button.data('code'));
+      updateModal.find('input[name="name"]').val(button.data('name'));
+      updateModal.find('input[name="testing"]').val(button.data('testing'));
+      updateModal.find('input[name="unit"]').val(button.data('unit'));
+      updateModal.find('input[name="experted_date"]').val(button.data('experted_date'));
+      updateModal.find('input[name="imoported_amount"]').val(button.data('imoported_amount'));
+      updateModal.find('input[name="batch_no"]').val(button.data('batch_no'));
+      updateModal.find('input[name="stage"]').val(button.data('stage'));
+
+
+      });
+
+
+      $('.form-deActive').on('submit', function (e) {
           e.preventDefault(); // chặn submit mặc định
            const form = this;
           const productName = $(form).find('button[type="submit"]').data('name');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('testing_code', 50);
             $table->foreign('testing_code')->references('testing_code')->on('product_category');
 
-            $table->float('sample_amount');
+            $table->float('imoported_amount');
             $table->string('batch_no',20);
             $table->string('stage', 30);
 

@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <title inertia>Laravel Inertia</title>
+
+    @include('layout.css')
+
     @viteReactRefresh
     @vite('resources/js/app.jsx')
-  </head>
-  <body>
+    @inertiaHead
+</head>
+<body class="antialiased">
     @inertia
-  </body>
+
+
+ @include('layout.js')
+ 
+</body>
+
 </html>

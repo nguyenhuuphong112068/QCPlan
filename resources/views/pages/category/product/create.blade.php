@@ -2,8 +2,7 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 <!-- Modal -->
-<div class="modal fade" id="productNameModal" tabindex="-1" role="dialog" aria-labelledby="productNameModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="productNameModal" tabindex="-1" role="dialog" aria-labelledby="productNameModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         
         <form action="{{ route('pages.category.product.store') }}" method="POST">

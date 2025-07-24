@@ -24,6 +24,8 @@
     @yield('mainContent')
 
     @yield('model')
+
+    @yield('script')
         
  
   </div>

@@ -5,17 +5,20 @@
     @include('layout.topNAV')
 @endsection
 
-
 @section('leftNAV')
     @include('layout.leftNAV')
 @endsection
  
 @section('mainContent')
-  @include('pages.Import.dataTable')
+  @include('pages.Schedual.schedual')
 @endsection
 
 @section('model')
-  @include('pages.Import.category') 
-  @include('pages.Import.create')
-  @include('pages.Import.update') 
+  {{-- @include('pages.Schedual.create')
+  @include('pages.Schedual.update')  --}}
+@endsection
+
+@section('script')
+    @viteReactRefresh
+    @vite('resources/js/ganttApp.jsx')
 @endsection

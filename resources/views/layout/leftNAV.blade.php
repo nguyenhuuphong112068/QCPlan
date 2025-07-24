@@ -30,7 +30,7 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route ('pages.materData.productName.list') }}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tên Sản Phẩm</p>
                 </a>
@@ -114,6 +114,29 @@
                 </a>
               </li>
 
+            </ul>
+          </li>
+
+
+          <!-- Droplist Menu Lập Lịch -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Lập Lịch
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="{{ route ('pages.Schedual.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lịch Kiểm Nghiện </p>
+                </a>
+              </li>
 
             </ul>
           </li>
