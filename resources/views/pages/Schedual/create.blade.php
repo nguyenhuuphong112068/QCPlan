@@ -5,7 +5,7 @@
   <div class="modal-dialog" role="document">
    
     <form 
-      action="{{route('pages.Schedual.store')}}" 
+      action="{{route('pages.User.store')}}" 
       method="POST">
       @csrf
 

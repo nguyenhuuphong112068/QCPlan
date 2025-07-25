@@ -13,18 +13,15 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('impored_id'); // Tham chiếu bảng mẫu chờ kiểm
-            $table->unsignedBigInteger('instrument_id'); // Thiết bị kiểm nghiệm
-            $table->timestamp('start_time'); // Bắt đầu kiểm
-            $table->timestamp('end_time');   // Kết thúc kiểm
-            $table->string('note')->nullable();
-
-            // Foreign Keys
-            $table->foreign('sample_id')->references('id')->on('samples');
-            $table->foreign('instrument_id')->references('id')->on('instruments');
-
-            $table->timestamps();
+            $table->unsignedBigInteger('imported_id');
+            $table->unsignedBigInteger('ins_Id');
+            $table->dateTime('startDate');
+            $table->dateTime('endDate');
+            $table->string('note', 255)->nullable();
+            $table->string('analyst', 100);
+            $table->boolean ('finished')->default(0);
+             $table->boolean ('active')->default(true);
+            $table->timestamps(); // created_at & updated_at
         });
     }
 

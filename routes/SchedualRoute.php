@@ -11,10 +11,11 @@ Route::prefix('/Schedual')
 ->middleware(CheckLogin::class)
 ->group(function(){
 
+        Route::get('view','view');
         Route::get('','index')->name('list');
-        // Route::post('store','store')->name('store');
-        // Route::post('update', 'update')->name('update');
-        // Route::post('deActive/{id}','deActive')->name('deActive'); 
+        Route::post('store','store')->name('store');
+        Route::post('update', 'update')->name('update');
+        Route::post('deActive/{id}','deActive')->name('deActive'); 
     
 });
    

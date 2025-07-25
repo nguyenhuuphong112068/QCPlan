@@ -10,15 +10,10 @@
 @endsection
  
 @section('mainContent')
-  @include('pages.Schedual.schedual')
+  @include('pages.Schedual.dataTable')
 @endsection
 
 @section('model')
   {{-- @include('pages.Schedual.create')
   @include('pages.Schedual.update')  --}}
-@endsection
-
-@section('script')
-    @viteReactRefresh
-    @vite('resources/js/ganttApp.jsx')
 @endsection

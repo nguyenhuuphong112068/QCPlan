@@ -30,7 +30,7 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route ('pages.materData.productName.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tên Sản Phẩm</p>
                 </a>
@@ -130,11 +130,18 @@
             </a>
             
             <ul class="nav nav-treeview">
-              
+
               <li class="nav-item">
                 <a href="{{ route ('pages.Schedual.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lịch Kiểm Nghiện </p>
+                  <p>Lập Lịch KN </p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="/Schedual/view" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Xem Lịch KN </p>
                 </a>
               </li>
 

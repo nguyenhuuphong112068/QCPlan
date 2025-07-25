@@ -1,11 +1,12 @@
+
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
    
     <form 
-      action="{{route('pages.Schedual.store')}}" 
+      action="{{route('pages.User.update')}}" 
       method="POST">
       @csrf
 
@@ -15,8 +16,8 @@
               <img src="{{ asset('img/iconstella.svg') }}" style="opacity: 0.8 ; max-width:45px;">
           </a>
 
-          <h4 class="modal-title w-100 text-center" id="pModalLabel" style="color: #CDC717">
-              {{'Tạo Mới User' }}
+          <h4 class="modal-title w-100 text-center" id="ModalLabel" style="color: #CDC717">
+              {{'Cập Nhật User' }}
           </h4>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
@@ -26,17 +27,17 @@
 
         <div class="modal-body">
         
-
-            {{-- USER NAME --}}
+        <input type="hidden" class="form-control" name="id" value="">
+        {{-- USER NAME --}}
               
           <div class="row">
               <div class="col-md-6">
                   <div class="form-group">
                     <label for="userName">Tên Đăng Nhập</label>
-                    <input type="text" class="form-control" name="userName" 
+                    <input type="text" class="form-control" name="userName"  disabled
                       value="{{ old('userName') }}" placeholder="Mã Số Nhân Viên">
                   </div>
-                  @error('userName','createErrors')
+                  @error('userName','updateErrors')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
 
@@ -45,10 +46,10 @@
                   {{-- PW--}}
                   <div class="form-group">
                     <label for="passWord">Mật Khẩu</label>
-                    <input type="text" class="form-control" name="passWord"  
-                      value="{{ old('passWord') }}">
+                    <input type="text" class="form-control" name="passWord"  disabled 
+                      value=" ***** ">
                   </div>
-                  @error('passWord','createErrors')
+                  @error('passWord','updateErrors')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
             </div>
@@ -60,14 +61,14 @@
               <input type="text" class="form-control" name="fullName"  placeholder="Tên Đầy Đủ"
                 value="{{ old('fullName') }}">
             </div>
-            @error('fullName','createErrors')
+            @error('fullName','updateErrors')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
             {{-- USER GROUP --}}
               <div class="form-group">
-                  <label for="userGroup">Phân Quyền</label>
-                  <select class="form-control" name="userGroup" id="userGroup">
+                  <label for="userGroupUpdate">Phân Quyền</label>
+                  <select class="form-control" name="userGroup" id="userGroupUpdate">
                       <option value="">-- Chọn phân quyền --</option>
                       @foreach ($userGroups as $userGroup)
                           <option value="{{ $userGroup->name }}" 
@@ -76,7 +77,7 @@
                           </option>
                       @endforeach
                   </select>
-                  @error('userGroup','createErrors')
+                  @error('userGroup','updateErrors')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                   @enderror
               </div>
@@ -87,8 +88,8 @@
                 <div class="form-group">
 
                   {{-- GROUP IN DEPARTMENT --}}
-                    <label for="groupName">Tổ</label>
-                    <select class="form-control" name="groupName" id="groupName">
+                    <label for="groupNameUpdate">Tổ</label>
+                    <select class="form-control" name="groupName" id="groupNameUpdate">
                         <option value="">-- Chọn Tổ --</option>
                         @foreach ($groups as $group)
                             <option value="{{ $group->name }}" 
@@ -97,7 +98,7 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('groupName','createErrors')
+                    @error('groupName','updateErrors')
                           <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>               
@@ -106,8 +107,8 @@
               <div class="col-md-6">
                   {{-- DEPARTMENT--}}
                   <div class="form-group">
-                      <label for="deparment">Phòng Ban</label>
-                      <select class="form-control" name="deparment" id="deparment">
+                      <label for="deparmentUpdate">Phòng Ban</label>
+                      <select class="form-control" name="deparment" id="deparmentUpdate">
                           <option value="">-- Chọn phòng ban --</option>
 
                           @foreach ($deparments as $department)
@@ -118,7 +119,7 @@
                           @endforeach
                       </select>
 
-                      @error('deparment','createErrors')
+                      @error('deparment','updateErrors')
                           <div class="alert alert-danger mt-1">{{ $message }}</div>
                       @enderror
                   </div>
@@ -154,10 +155,10 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 {{-- //Show modal nếu có lỗi validation --}}
-@if ($errors->createErrors->any())
+@if ($errors->updateErrors->any())
 <script>
     $(document).ready(function () {
-        $('#Modal').modal('show');
+        $('#UpdateModal').modal('show');
     });
 </script>
 @endif

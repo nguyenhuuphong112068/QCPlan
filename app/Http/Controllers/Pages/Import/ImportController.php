@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ImportController extends Controller
 {
-           public function index(){
+        public function index(){
 
                 $category = DB::table('product_category')->where ('active',1)->orderBy('created_at','desc')->get();
 
