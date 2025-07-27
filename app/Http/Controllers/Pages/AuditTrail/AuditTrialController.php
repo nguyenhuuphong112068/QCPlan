@@ -9,7 +9,10 @@ class AuditTrialController extends Controller
 {
     public function index(){
 
-        $datas = DB::table('audittriallog')->orderBy('created_at','desc')->get();
+        $datas = DB::table('audittriallog')
+        ->select('audittriallog.*', 'user_management.fullName')
+        ->join('user_management', 'audittriallog.userName', '=', 'user_management.userName')
+        ->orderBy('created_at','desc')->get();
                 
         session()->put(['title'=> 'Audit Trial Log']);
            
@@ -20,7 +23,7 @@ class AuditTrialController extends Controller
     {
         
         DB::table('audittriallog')->insert([
-            'fullName'     =>  session('user')['fullName'] ?? 'NA',
+            'userName'     =>  session('user')['userName'] ?? 'NA',
             'action'      => $action,
             'table_Audit'       => $table,
             'record_Id_AuditTrial'    => $recordId,

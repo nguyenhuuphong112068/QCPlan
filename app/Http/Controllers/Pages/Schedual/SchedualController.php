@@ -208,7 +208,7 @@ class SchedualController extends Controller
                 
                 if ($check){
                         DB::table('import')->where('id', $request->imported_id)->update(['finished' => 1]);
-                        DB::table('schedules')->where('id', $request->imported_id)->update(['finished' => 1]);
+                        DB::table('schedules')->where('id', $request->schedual_id)->update(['finished' => 1]);
 
                         $datas = DB::table('history')
                         ->select(

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->dateTime('startDate');
             $table->dateTime('endDate');
             $table->string('note', 255)->nullable();
-            $table->string('analyst_id', 100); 
             $table->string('analyst', 100);            
             $table->string('result',20);
             $table->string('relativeReport',255)->nullable();

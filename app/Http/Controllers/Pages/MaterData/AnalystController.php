@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages\MaterData;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Pages\AuditTrail\AuditTrialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -65,12 +66,17 @@ class AnalystController extends Controller
                 if ($validator->fails()) {
                         return redirect()->back()->withErrors($validator, 'updateErrors')->withInput();
                 } 
-           
+
+                $oldData = DB::table('analyst')->where('id', $request->id)->first();
+
                 DB::table('analyst')->where('id', $request->id)->update([
                         'groupName' => $request->groupName,
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'created_at' => now(),
                 ]);
+
+                AuditTrialController::log('Update',"analyst" , $request->id ,  $oldData->groupName, $request->groupName);
+                
                 return redirect()->back()->with('success', 'Cập nhật thành công!');
         }
 
