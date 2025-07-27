@@ -21,7 +21,7 @@
           <!-- Droplist Menu Dữ Liệu Gốc  -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-key"></i>
               <p>
                 Dữ Liệu Gốc
                 <i class="right fas fa-angle-left"></i>
@@ -72,7 +72,7 @@
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Danh Mục 
                 <i class="right fas fa-angle-left"></i>
@@ -98,7 +98,7 @@
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-file-import"></i>
               <p>
                 Nhận Mẫu
                 <i class="right fas fa-angle-left"></i>
@@ -122,7 +122,7 @@
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Lập Lịch
                 <i class="right fas fa-angle-left"></i>
@@ -148,11 +148,21 @@
             </ul>
           </li>
 
+          <!-- History-->
+          <li class="nav-item">
+            <a href="{{ route ('pages.History.list') }}" class="nav-link">
+              <i class="fas fa-history"></i>
+              <p>
+                Lịch Sử Kiểm Nghiệm
+              </p>
+            </a>
+          </li>
+
 
             <!-- User-->
           <li class="nav-item">
             <a href="{{ route ('pages.User.list') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Quản Lý User
               </p>

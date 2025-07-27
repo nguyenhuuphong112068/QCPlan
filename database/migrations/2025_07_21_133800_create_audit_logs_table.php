@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('auditTrialLog', function (Blueprint $table) {
                 $table->id();
-                $table->string('fullName'); 
+                $table->string('userName',10);
                 $table->string('action'); 
                 $table->string('table_Audit');
                 $table->unsignedBigInteger('record_Id_AuditTrial');
@@ -21,6 +21,9 @@ return new class extends Migration
                 $table->text('new_values')->nullable();
                 $table->ipAddress('ip_address')->nullable();
                 $table->timestamps();
+
+                $table->foreign('userName')->references('userName')->on('user_Management');
+
         });
     }
 

@@ -15,6 +15,7 @@ class UserController extends Controller
                 $groups = DB::table('groups')->where('active', true)->get();
                 $deparments = DB::table('deparments')->where('active', true)->get();
                 $userGroups = DB::table('usergroup')->where('active', true)->get();
+               
                 $datas = DB::table('user_management')->where ('isActive',1)->orderBy('created_at','desc')->get();
                 
                 session()->put(['title'=> 'Danh Sách Người Dùng']);

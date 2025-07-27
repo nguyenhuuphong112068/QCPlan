@@ -138,8 +138,9 @@
 
       const button = $(this);
       const updateModal = $('#updateModal');
-      updateModal.modal('show');
+      const amount = button.data('imoported_amount');
 
+      updateModal.modal('show');
       // Gán dữ liệu vào modal mới (nếu cần)
       updateModal.find('input[name="id"]').val(button.data('id'));
       updateModal.find('input[name="code"]').val(button.data('code'));
@@ -147,7 +148,7 @@
       updateModal.find('input[name="testing"]').val(button.data('testing'));
       updateModal.find('input[name="unit"]').val(button.data('unit'));
       updateModal.find('input[name="experted_date"]').val(button.data('experted_date'));
-      updateModal.find('input[name="imoported_amount"]').val(button.data('imoported_amount'));
+      updateModal.find('input[name="imoported_amount"]').attr('min', amount).val(amount);
       updateModal.find('input[name="batch_no"]').val(button.data('batch_no'));
       updateModal.find('input[name="stage"]').val(button.data('stage'));
 

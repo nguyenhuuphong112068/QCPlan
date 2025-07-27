@@ -53,6 +53,7 @@
                     <div class="form-group">
                         <label for="testing">Chỉ Tiêu</label>
                         <select class="form-control" name="testing" id="testing">
+                            <option value="">-- Chọn chỉ tiêu --</option>
                             @foreach ($testings as $testing)
                                 <option value="{{ $testing->name }}"
                                     {{ old('testing') == $testing->name ? 'selected' : '' }} data-id="{{ $testing->id }}" >
@@ -112,16 +113,17 @@
                         <div class="col-md-6">
                             {{-- Instrument --}}
                             <div class="form-group">
-                                <label for="instrument">Thiết Bị</label>
-                                <select class="form-control" name="instrument" id="instrument">
-                                    @foreach ($instruments as $instrument)
-                                        <option value="{{ $instrument->name }}"
-                                            {{ old('instrument') == $instrument->name ? 'selected' : '' }}>
-                                            {{ $instrument->name }}
+                                <label for="instrument_type">Loại Thiết Bị</label>
+                                <select class="form-control" name="instrument_type" id="instrument_type">
+                                    <option value="">-- Chọn Loại Thiết Bị --</option>
+                                    @foreach ($instrument_type as $data)
+                                        <option value="{{ $data->instrument_type }}"
+                                            {{ old('instrument_type') == $data->instrument_type ? 'selected' : '' }}>
+                                            {{ $data->instrument_type }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('instrument', 'createErrors')
+                                @error('instrument_type', 'createErrors')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>

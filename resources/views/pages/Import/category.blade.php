@@ -1,7 +1,13 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+<style>
+  .custom-modal-size {
+    max-width: 90% !important;
+    width: 90% !important;
+  }
+</style>
 
 <div class="modal fade" id="selectProductModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog custom-modal-size" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
@@ -35,7 +41,7 @@
                     <th>Chỉ tiêu</th>
                     <th>Số lượng mẫu yêu cầu</th>
                     <th>Thời gian thực hiện</th>
-                    <th>Thiết bị</th>
+                    <th>Loại Thiết bị</th>
                     <th>Chọn</th>
                   </tr>
                 </thead>
@@ -48,7 +54,7 @@
                       <td>{{ $data->testing }}</td>
                       <td>{{ $data->sample_Amout . ' ' . $data->unit }}</td>
                       <td>{{ $data->excution_time }} h</td>
-                      <td>{{ $data->instrument }}</td>
+                      <td>{{ $data->instrument_type }}</td>
                       <td class="text-center align-middle">
                         <button type="button" class="btn btn-success btn-plus" data-dismiss="modal"
                         
@@ -79,25 +85,24 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+      $('.btn-plus').click(function () {
+          const button = $(this);
+          const createModal = $('#createModal');
+          const selectModal = $('#selectProductModal');
+          const amount = button.data('sample_amout');
+          createModal.modal('show');
 
-
-$(document).ready(function () {
-  $('.btn-plus').click(function () {
-      const button = $(this);
-      const createModal = $('#createModal');
-      const selectModal = $('#selectProductModal');
-
-      createModal.modal('show');
-
-      // Gán dữ liệu vào modal mới (nếu cần)
-      createModal.find('input[name="testing_code"]').val(button.data('testing_code'));
-      createModal.find('input[name="code"]').val(button.data('code'));
-      createModal.find('input[name="name"]').val(button.data('name'));
-      createModal.find('input[name="testing"]').val(button.data('testing'));
-      createModal.find('input[name="sample_amout"]').val(button.data('sample_amout'));
-      createModal.find('input[name="unit"]').val(button.data('unit'));
-      createModal.find('input[name="excution_time"]').val(button.data('excution_time'));
-     
-  });
-});
+          // Gán dữ liệu vào modal mới (nếu cần)
+          createModal.find('input[name="testing_code"]').val(button.data('testing_code'));
+          createModal.find('input[name="code"]').val(button.data('code'));
+          createModal.find('input[name="name"]').val(button.data('name'));
+          createModal.find('input[name="testing"]').val(button.data('testing'));
+          createModal.find('input[name="sample_amout"]').val(amount);
+          createModal.find('input[name="imoported_amount"]').attr('min', amount).val(amount);
+          createModal.find('input[name="unit"]').val(button.data('unit'));
+          createModal.find('input[name="excution_time"]').val(button.data('excution_time'));
+        
+      });
+    });
 </script>

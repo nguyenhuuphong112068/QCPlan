@@ -60,7 +60,17 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
 
-                      {{-- Gourp_ID--}}
+         {{-- Instrement Type --}}
+          <div class="form-group">
+            <label for="instrument_type">Loại Thiết Bị</label>
+            <input type="text" class="form-control" name="instrument_type" 
+                value="{{ old('instrument_type') }}">
+          </div>
+          @error('instrument_type', 'createErrors')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+
+          {{-- Gourp_ID--}}
           <div class="form-group">
               <label for="belongGroup_id">Tổ Quản Lý</label>
               <select class="form-control" name="belongGroup_id" id="belongGroup_id">

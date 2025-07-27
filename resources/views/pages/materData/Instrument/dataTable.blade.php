@@ -28,6 +28,7 @@
                     <th>Mã Thiết Bị</th>
                     <th>Tên Thiết Bị</th>
                     <th>Tên Viết Tắt</th>
+                    <th>Loại Thiết Bị</th>
                     <th>Tổ Quản Lý</th>
                     <th>Người Tạo</th>
                     <th>Ngày Tạo</th>
@@ -43,6 +44,7 @@
                       <td>{{ $data->code}}</td>
                       <td>{{ $data->name}}</td>
                       <td>{{ $data->shortName}}</td>
+                      <td>{{ $data->instrument_type}}</td>
                       <td>{{ $data->groupName}}</td>
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
@@ -54,6 +56,7 @@
                               data-name="{{ $data->name }}"
                               data-shortname="{{ $data->shortName}}"
                               data-groupName="{{ $data->groupName}}"
+                              data-instrument_type="{{ $data->instrument_type}}"
                               data-toggle="modal"
                               data-target="#UpdateModal">
                               <i class="fas fa-edit"></i>
@@ -121,6 +124,7 @@
           modal.find('input[name="name"]').val(button.data('name'));
           modal.find('input[name="shortName"]').val(button.data('shortname'));
           modal.find('input[name="id"]').val(button.data('id'));
+          modal.find('input[name="instrument_type"]').val(button.data('instrument_type'));
           modal.find('select[name="belongGroup_id"]').val(button.data('groupName'));
           const id = button.data('id');
 

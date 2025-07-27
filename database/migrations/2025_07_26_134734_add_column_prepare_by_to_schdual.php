@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_management', function (Blueprint $table) {
-            $table->string('prepareBy')->nullable();
+        Schema::table('schedules', function (Blueprint $table) {
+             $table->string('prepareBy',100); 
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_management', function (Blueprint $table) {
+        Schema::table('schedules', function (Blueprint $table) {
             $table->dropColumn('prepareBy');
         });
     }

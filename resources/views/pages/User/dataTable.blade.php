@@ -15,7 +15,7 @@
               <!-- /.card-Body -->
               <div class="card-body">
 
-                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#Modal" style="width: 155px" >
+                <button class="btn btn-success btn-create mb-2" data-toggle="modal" data-target="#createModal" style="width: 155px" >
                       <i class="fas fa-plus"></i> Thêm
                 </button>
 

@@ -20,19 +20,23 @@ return new class extends Migration
 
             $table->string('testing_code',50)->unique(); 
             $table->string('testing',50); 
-            $table->foreign('testing')->references('name')->on('testing');
+            
 
             $table->float('sample_Amout'); 
             $table->string('unit',20);
-            $table->foreign('unit')->references('name')->on('unit');
+            
 
             $table->float('excution_time');   
 
-            $table->string('instrument')->references('name')->on('instrument');             
+            $table->string('instrument_type')->references('instrument_type')->on('instrument');             
 
             $table->boolean ('active')->default(true);
             $table->string('prepareBy', 100);
             $table->timestamps();
+
+            $table->foreign('testing')->references('name')->on('testing');
+            $table->foreign('unit')->references('name')->on('unit');
+            $table->foreign('name')->references('name')->on('product_name');
         });
 
     }

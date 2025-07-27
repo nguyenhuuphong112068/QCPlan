@@ -40,11 +40,21 @@
 
             {{-- NAME --}}
             <div class="form-group">
-              <label for="name">Thiết Bị Kiểm Nghiệm</label>
+              <label for="name">Tên Thiết Bị</label>
               <input type="text" class="form-control" name="name" 
                 value="{{ old('name') }}">
             </div>
             @error('name', 'createErrors')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            {{-- Instrement Type --}}
+            <div class="form-group">
+              <label for="name">Loại Thiết Bị</label>
+              <input type="text" class="form-control" name="instrument_type" 
+                value="{{ old('instrument_type') }}">
+            </div>
+            @error('instrument_type', 'createErrors')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 

@@ -11,6 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('userGroup', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',50)->unique();
+            $table->boolean ('active')->default(true);
+            $table->string('prepareBy');
+            $table->timestamps();
+        });
+
+        Schema::create('deparments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',50)->unique();
+            $table->string('shortName',20)->unique();
+            $table->boolean ('active');
+            $table->string('prepareBy');
+            $table->timestamps();
+        });
+
         Schema::create('user_Management', function (Blueprint $table) {
             $table->id();
             $table->string('userName',10)->unique();
@@ -20,18 +37,18 @@ return new class extends Migration
             $table->string('deparment', 50);
             $table->string('groupName', 50);
             $table->string('mail', 255)->nullable();
-
-            $table->boolean('isLocked')->default(false);
-            
+            $table->boolean('isLocked')->default(false); 
             $table->boolean('isActive')->default(true);
-
             $table->date('changePWdate');
-
             $table->string('hisPW_1', 20)->nullable();
             $table->string('hisPW_2', 20)->nullable();
             $table->string('hisPW_3', 20)->nullable();
             $table->string('prepareBy');
             $table->timestamps();
+
+            $table->foreign('userGroup')->references('name')->on('userGroup'); 
+            $table->foreign('deparment')->references('name')->on('deparments'); 
+
         });
     }
 
@@ -41,5 +58,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('user_Management');
+        Schema::dropIfExists('deparments');
+        Schema::dropIfExists('userGroup');
     }
 };

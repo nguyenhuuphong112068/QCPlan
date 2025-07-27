@@ -1,18 +1,18 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
 <!-- Modal -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="productNameModalLabel" aria-hidden="true">
+<div class="modal fade" id="createHistoryModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
 
-        <form action="{{ route('pages.Schedual.store') }}" method="POST">
+        <form action="{{ route('pages.Schedual.finished') }}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <a href="{{ route('pages.general.home') }}">
                         <img src="{{ asset('img/iconstella.svg') }}" style="opacity: 0.8; max-width:45px;">
                     </a>
-                    <h4 class="modal-title w-100 text-center" id="productNameModalLabel" style="color: #CDC717">
-                        Nhận Mẫu
+                    <h4 class="modal-title w-100 text-center" id="" style="color: #CDC717">
+                        Xác Nhận Hoàn Thành Kiểm Nghiệm Mẫu
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
                         <span aria-hidden="true">&times;</span>
@@ -120,6 +120,31 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="imoported_amount">Kết Quả</label>
+                                 <select class="form-control" name="result" id="result">
+                                    <option value="Đạt Tiêu Chuẩn">Đạt Tiêu Chuẩn</option>
+                                    <option value="KHông Đạt Tiêu Chuẩn">KHông Đạt Tiêu Chuẩn</option>
+                                </select>
+                                @error('result', 'createErrors')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="relativeReport">Số Báo Cáo Liên Quan</label>
+                                <input type="text" name="relativeReport" class="form-control" value="{{ old('endDate') }}" >
+                                @error('relativeReport', 'createErrors')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group">
                         <div class="row">
@@ -137,8 +162,10 @@
 
                     <!-- Hidden field -->
                     {{-- <input type="hidden" name="instrument_type" value="{{ request()->get('instrument_type') }}"> --}}
-                    <input type="hidden" name="imported_id" value="{{ old('imported_id') }}">
-                    @error('imported_id', 'createErrors')
+
+                    <input type="hidden" name="schedual_id" value="{{ old('schedual_id') }}">
+
+                    @error('schedual_id', 'createErrors')
                             <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
 
@@ -160,41 +187,12 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 <!-- Mở lại modal nếu có lỗi -->
-@if ($errors->createErrors->any())
+
+@if ($errors->createHistoryErrors->any())
+    {{ dd ($errors->createHistoryErrors); }}
     <script>
         $(document).ready(function() {
-            $('#createModal').modal('show');
+            $('#createHistoryModal').modal('show');
         });
     </script>
 @endif
-
-<script>
-    $(document).ready(function () {
-        $('#startDate').on('change', function () {
-            const execution_time = $('#excution_time').val(); 
-            
-            if (!execution_time || !execution_time.includes(' ')) {
-                console.warn("Giá trị execution_time không hợp lệ:", execution_time);
-                return;
-            }
-
-            const parts = execution_time.split(' ');
-            const addedHours = parseInt(parts[0]) || 0;
-
-            let startDate = new Date($(this).val());
-            if (isNaN(startDate.getTime())) {
-                console.warn("Ngày không hợp lệ:", $(this).val());
-                return;
-            }
-
-
-            startDate.setHours(startDate.getHours() + addedHours);
-            const formatted = startDate.toISOString().slice(0, 16); 
-            // Gán giá trị vào input endDate
-            $('#endDate').val(formatted);
-        });
-
-    });
-
-</script>
-

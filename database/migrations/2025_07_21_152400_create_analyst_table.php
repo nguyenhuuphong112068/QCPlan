@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('analyst', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('fullName',100); 
+            $table->string('fullName',100)->unique(); 
             $table->string('groupName',100); 
             $table->foreign('groupName')->references('name')->on('groups');
             $table->string('prepareBy', 100)->nullable();

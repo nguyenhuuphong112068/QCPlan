@@ -48,7 +48,7 @@
                       <td>{{ $data->testing}}</td>
                       <td>{{ $data->sample_Amout . " " . $data->unit}}</td>
                       <td>{{ $data->excution_time}}  h</td>
-                      <td>{{ $data->instrument}}</td>                     
+                      <td>{{ $data->instrument_type}}</td>                     
                       <td>{{ $data->prepareBy}}</td>
                       <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>
                       
@@ -62,7 +62,7 @@
                               data-sample_amout="{{ $data->sample_Amout }}"
                               data-unit="{{ $data->unit }}"
                               data-excution-time="{{ $data->excution_time }}"
-                              data-instrument="{{ $data->instrument }}"
+                              data-instrument="{{ $data->instrument_type }}"
                               
                               
                               data-toggle="modal"
@@ -137,7 +137,7 @@
           modal.find('input[name="sample_Amout"]').val(button.data('sample_amout'));
           modal.find('input[name="unit"]').val(button.data('unit'));
           modal.find('input[name="excution_time"]').val(button.data('excution-time'));
-          modal.find('input[name="instrument"]').val(button.data('instrument'));
+          modal.find('input[name="instrument_type"]').val(button.data('instrument_type'));
 
           const id = button.data('id');
 

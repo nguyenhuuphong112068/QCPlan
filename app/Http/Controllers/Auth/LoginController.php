@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,12 +12,13 @@ class LoginController extends Controller{
 // dd ($request->all());  
 
     public function showLogin(){
+
         session()->put(['title'=> 'KÊ HOẠCH KIỂM NGHIỆM']);
         return view('login');}
 
 
-     public function login(Request $request)
-    {
+    public function login(Request $request){
+
         // $hash = password_hash("123456", PASSWORD_DEFAULT);
         // dd($hash);
 

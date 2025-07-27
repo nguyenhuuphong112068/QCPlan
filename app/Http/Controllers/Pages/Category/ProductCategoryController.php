@@ -13,7 +13,7 @@ class ProductCategoryController extends Controller
         public function index(){
                 $testings = DB::table('testing')->where('active', true)->get();
                 $units = DB::table('unit')->where('active', true)->get();
-                $instruments = DB::table('instrument')->where('active', true)->get();
+                $instrument_type = DB::table('instrument')->select('instrument_type')->where('active', true)->groupBy('instrument_type')->get();
                 $productNames = DB::table('product_name')->where('active', true)->get();
 
                 $datas = DB::table('product_category')->where ('active',1)->orderBy('created_at','desc')->get();
@@ -24,7 +24,7 @@ class ProductCategoryController extends Controller
                         'datas' => $datas,
                         'testings' => $testings,
                         'units' => $units,
-                        'instruments' => $instruments,
+                        'instrument_type' => $instrument_type,
                         'productNames' => $productNames
                 ]);
         }
@@ -40,7 +40,7 @@ class ProductCategoryController extends Controller
                 'sample_Amout' => 'required|numeric|gt:0', 
                 'unit' => 'required|string',
                 'excution_time' => 'required|numeric|gt:0', 
-                'instrument' => 'required|string',
+                'instrument_type' => 'required|string',
                 'testing_code' =>  'required|unique:product_category,testing_code',
 
                 ], [
@@ -63,7 +63,7 @@ class ProductCategoryController extends Controller
                 'excution_time.numeric' => 'Số lượng mẫu là kiểu số',
                 'excution_time.gt' => 'Số lượng mẫu phải lớn hơn 0',
                 
-                'instrumnet.unit' => 'Vui lòng chọn thiết bị kiểm',
+                'instrument_type.required' => 'Vui lòng chọn thiết bị kiểm',
 
                 'testing_code.unique' => 'Danh mục sản phẩm Đã Tồn Tại đã tồn tại.',
                 ]);
@@ -82,7 +82,7 @@ class ProductCategoryController extends Controller
                         'unit'=> $request->unit,
                         'testing_code' => $request->testing_code,
                         'excution_time' => $request->excution_time,
-                        'instrument'=> $request->instrument,
+                        'instrument_type'=> $request->instrument_type,
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'created_at' => now(),
                 ]);
@@ -96,7 +96,8 @@ class ProductCategoryController extends Controller
                 'sample_Amout' => 'required|numeric|gt:0', 
                 'unit' => 'required|string',
                 'excution_time' => 'required|numeric|gt:0', 
-                'instrument' => 'required|string',
+                'instrument_type' => 'required|string',
+                
                 ], [
 
                 'testing.required' => 'Vui lòng chọn chỉ tiêu kiểm',
@@ -111,7 +112,7 @@ class ProductCategoryController extends Controller
                 'excution_time.numeric' => 'Số lượng mẫu là kiểu số',
                 'excution_time.numeric' => 'Số lượng mẫu phải lớn hơn 0',
                 
-                'instrumnet.unit' => 'Vui lòng chọn thiết bị kiểm',
+                'instrument_type.unit' => 'Vui lòng chọn loại thiết bị',
                 ]);
                 
                 if ($validator->fails()) {
@@ -123,7 +124,7 @@ class ProductCategoryController extends Controller
                         'sample_Amout'=> $request->sample_Amout,
                         'unit'=> $request->unit,
                         'excution_time' => $request->excution_time,
-                        'instrument'=> $request->instrument,
+                        'instrument_type'=> $request->instrument_type,
                         'prepareBy' => session('user')['fullName'] ?? 'Admin',
                         'updated_at' => now(),
                 ]);

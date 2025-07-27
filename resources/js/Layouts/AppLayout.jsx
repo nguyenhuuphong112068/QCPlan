@@ -12,11 +12,11 @@ export default function AppLayout({ children, user, title }) {
           </main>
       </div> 
 
-      <header className="bg-white fixed w-full top-0 z-10 w-[195px] ">
+      <header className="bg-white fixed  top-0 z-10 w-[195px] ">
         <div className="flex mx-auto items-center justify-between px-4 py-2">
           
           {/* Cột 1: Logo */}
-          <div className="w-1/3 ml-[50px] flex justify-start items-center">
+          <div className=" ml-[50px] flex justify-start items-center">
             <a href="/Schedual" className="flex items-center">
               <img
                 src="/img/iconstella.svg"
@@ -26,7 +26,12 @@ export default function AppLayout({ children, user, title }) {
             </a>
           </div>
 
-          {/* Cột 2: Tiêu đề */}
+         
+
+        </div>
+      </header>
+
+      {/* Cột 2: Tiêu đề */}
           {/* <div className="w-1/3 text-center">
             <h4 className="text-lg font-semibold text-yellow-600">{title}</h4>
           </div> */}
@@ -40,11 +45,6 @@ export default function AppLayout({ children, user, title }) {
               </div>
             )}
           </div> */}
-
-        </div>
-      </header>
-
- 
 
     </div>
   );

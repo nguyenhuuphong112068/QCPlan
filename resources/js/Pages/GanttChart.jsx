@@ -7,7 +7,7 @@ import AppLayout from "../Layouts/AppLayout";
 
 export default function GanttChart({ title, user, data: events, rows: devices }) {
   const [schedulerData, setSchedulerData] = useState([]);
-
+  
   const range = {
     startDate: dayjs().hour(7).startOf("hour").toDate(),
     endDate: dayjs().hour(19).endOf("hour").toDate(),
@@ -67,11 +67,9 @@ export default function GanttChart({ title, user, data: events, rows: devices })
        
         data={schedulerData}
         range={range}
-
+        zoom="hour"
         onTileClick={(item) => handleItemDrop (item)}
-
         onItemClick={(startDate) => handleClick (startDate)}
-        
         
       />
      
